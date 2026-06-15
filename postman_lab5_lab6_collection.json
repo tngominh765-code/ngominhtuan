@@ -1,0 +1,731 @@
+{
+  "info": {
+    "name": "LAB 5&6 Web API - Full",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "base_url",
+      "value": "http://localhost/full/index.php?url=api"
+    },
+    {
+      "key": "token",
+      "value": ""
+    },
+    {
+      "key": "refresh_token",
+      "value": ""
+    },
+    {
+      "key": "product_id",
+      "value": "1"
+    },
+    {
+      "key": "category_id",
+      "value": "1"
+    },
+    {
+      "key": "order_id",
+      "value": "1"
+    }
+  ],
+  "item": [
+    {
+      "name": "Đăng nhập admin",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": {
+          "raw": "{{base_url}}/account/checkLogin",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "account",
+            "checkLogin"
+          ]
+        },
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"username\": \"admin\",\n  \"password\": \"123456\"\n}"
+        }
+      }
+    },
+    {
+      "name": "Refresh token",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": {
+          "raw": "{{base_url}}/account/refreshToken",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "account",
+            "refreshToken"
+          ]
+        },
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"refresh_token\": \"{{refresh_token}}\"\n}"
+        }
+      }
+    },
+    {
+      "name": "Me",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{token}}"
+          }
+        ],
+        "url": {
+          "raw": "{{base_url}}/account/me",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "account",
+            "me"
+          ]
+        }
+      }
+    },
+    {
+      "name": "Danh sách sản phẩm",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{base_url}}/product&name=&sort=price_asc&page=1&per_page=10",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "product?name=&sort=price_asc&page=1&per_page=10"
+          ]
+        }
+      }
+    },
+    {
+      "name": "Chi tiết sản phẩm",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{base_url}}/product/{{product_id}}",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "product",
+            "{{product_id}}"
+          ]
+        }
+      }
+    },
+    {
+      "name": "Thêm sản phẩm",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{token}}"
+          },
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": {
+          "raw": "{{base_url}}/product",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "product"
+          ]
+        },
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"name\": \"Laptop API Test\",\n  \"description\": \"Tạo từ Postman\",\n  \"price\": 15000000,\n  \"category_id\": 1,\n  \"image\": \"uploads/laptop.png\"\n}"
+        }
+      }
+    },
+    {
+      "name": "Sửa sản phẩm",
+      "request": {
+        "method": "PUT",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{token}}"
+          },
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": {
+          "raw": "{{base_url}}/product/{{product_id}}",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "product",
+            "{{product_id}}"
+          ]
+        },
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"name\": \"Laptop API Updated\",\n  \"description\": \"Cập nhật từ Postman\",\n  \"price\": 16000000,\n  \"category_id\": 1,\n  \"image\": \"uploads/laptop.png\"\n}"
+        }
+      }
+    },
+    {
+      "name": "Xóa sản phẩm",
+      "request": {
+        "method": "DELETE",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{token}}"
+          }
+        ],
+        "url": {
+          "raw": "{{base_url}}/product/{{product_id}}",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "product",
+            "{{product_id}}"
+          ]
+        }
+      }
+    },
+    {
+      "name": "Danh sách danh mục",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{base_url}}/category",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "category"
+          ]
+        }
+      }
+    },
+    {
+      "name": "Thêm danh mục",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{token}}"
+          },
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": {
+          "raw": "{{base_url}}/category",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "category"
+          ]
+        },
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"name\": \"Danh mục API\",\n  \"description\": \"Tạo bằng Postman\"\n}"
+        }
+      }
+    },
+    {
+      "name": "Sửa danh mục",
+      "request": {
+        "method": "PUT",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{token}}"
+          },
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": {
+          "raw": "{{base_url}}/category/{{category_id}}",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "category",
+            "{{category_id}}"
+          ]
+        },
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"name\": \"Danh mục API Updated\",\n  \"description\": \"Đã sửa\"\n}"
+        }
+      }
+    },
+    {
+      "name": "Xóa danh mục",
+      "request": {
+        "method": "DELETE",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{token}}"
+          }
+        ],
+        "url": {
+          "raw": "{{base_url}}/category/{{category_id}}",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "category",
+            "{{category_id}}"
+          ]
+        }
+      }
+    },
+    {
+      "name": "Xem giỏ hàng",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{token}}"
+          }
+        ],
+        "url": {
+          "raw": "{{base_url}}/cart",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "cart"
+          ]
+        }
+      }
+    },
+    {
+      "name": "Thêm vào giỏ",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{token}}"
+          },
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": {
+          "raw": "{{base_url}}/cart",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "cart"
+          ]
+        },
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"product_id\": 1,\n  \"quantity\": 2\n}"
+        }
+      }
+    },
+    {
+      "name": "Cập nhật giỏ",
+      "request": {
+        "method": "PUT",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{token}}"
+          },
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": {
+          "raw": "{{base_url}}/cart/1",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "cart",
+            "1"
+          ]
+        },
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"quantity\": 3\n}"
+        }
+      }
+    },
+    {
+      "name": "Tổng tiền giỏ",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{token}}"
+          }
+        ],
+        "url": {
+          "raw": "{{base_url}}/cart/total",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "cart",
+            "total"
+          ]
+        }
+      }
+    },
+    {
+      "name": "Xóa 1 sản phẩm khỏi giỏ",
+      "request": {
+        "method": "DELETE",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{token}}"
+          }
+        ],
+        "url": {
+          "raw": "{{base_url}}/cart/1",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "cart",
+            "1"
+          ]
+        }
+      }
+    },
+    {
+      "name": "Xóa toàn bộ giỏ",
+      "request": {
+        "method": "DELETE",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{token}}"
+          }
+        ],
+        "url": {
+          "raw": "{{base_url}}/cart/clear",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "cart",
+            "clear"
+          ]
+        }
+      }
+    },
+    {
+      "name": "Tạo đơn hàng",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{token}}"
+          },
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": {
+          "raw": "{{base_url}}/order",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "order"
+          ]
+        },
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"name\": \"Nguyễn Văn A\",\n  \"phone\": \"0909000000\",\n  \"address\": \"TP.HCM\",\n  \"payment_method\": \"COD\"\n}"
+        }
+      }
+    },
+    {
+      "name": "Danh sách đơn hàng",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{token}}"
+          }
+        ],
+        "url": {
+          "raw": "{{base_url}}/order",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "order"
+          ]
+        }
+      }
+    },
+    {
+      "name": "Chi tiết đơn hàng",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{token}}"
+          }
+        ],
+        "url": {
+          "raw": "{{base_url}}/order/{{order_id}}",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "order",
+            "{{order_id}}"
+          ]
+        }
+      }
+    },
+    {
+      "name": "Cập nhật trạng thái đơn",
+      "request": {
+        "method": "PUT",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{token}}"
+          },
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": {
+          "raw": "{{base_url}}/order/{{order_id}}",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "order",
+            "{{order_id}}"
+          ]
+        },
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"status\": \"processing\"\n}"
+        }
+      }
+    },
+    {
+      "name": "Hủy đơn hàng",
+      "request": {
+        "method": "DELETE",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{token}}"
+          }
+        ],
+        "url": {
+          "raw": "{{base_url}}/order/{{order_id}}",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "order",
+            "{{order_id}}"
+          ]
+        }
+      }
+    },
+    {
+      "name": "Thanh toán",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{token}}"
+          },
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": {
+          "raw": "{{base_url}}/payment/{{order_id}}",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "payment",
+            "{{order_id}}"
+          ]
+        },
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"payment_method\": \"COD\"\n}"
+        }
+      }
+    },
+    {
+      "name": "Đăng ký",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": {
+          "raw": "{{base_url}}/account/register",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "account",
+            "register"
+          ]
+        },
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"username\": \"user_api\",\n  \"fullname\": \"User API\",\n  \"email\": \"user_api@example.com\",\n  \"password\": \"123456\"\n}"
+        }
+      }
+    },
+    {
+      "name": "Cập nhật hồ sơ",
+      "request": {
+        "method": "PUT",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{token}}"
+          },
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": {
+          "raw": "{{base_url}}/account/profile",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "account",
+            "profile"
+          ]
+        },
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"fullname\": \"User API Updated\",\n  \"email\": \"user_api@example.com\"\n}"
+        }
+      }
+    },
+    {
+      "name": "Đổi mật khẩu",
+      "request": {
+        "method": "PUT",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{token}}"
+          },
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": {
+          "raw": "{{base_url}}/account/changePassword",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "account",
+            "changePassword"
+          ]
+        },
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"old_password\": \"123456\",\n  \"new_password\": \"1234567\"\n}"
+        }
+      }
+    },
+    {
+      "name": "Quên mật khẩu",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": {
+          "raw": "{{base_url}}/account/forgotPassword",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "account",
+            "forgotPassword"
+          ]
+        },
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"email\": \"user_api@example.com\"\n}"
+        }
+      }
+    }
+  ]
+}
